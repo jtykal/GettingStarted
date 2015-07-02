@@ -22,11 +22,11 @@ Ext.define('CustomApp', {
           listeners: {
               load: function(myStore, myData, success) {
                   console.log('got data!', myStore, myData);
-                  this._loadGrid(myStore);      // if we did NOT pass scope:this below, this line would be incorrectly trying to call _createGrid() on the store which does not exist.
+                  this._loadGrid(myStore);      // if we did NOT pass scope:this below, this line would be incorrectly trying to call _loadGrid() on the store which does not exist.
               },
               scope: this                         // This tells the wsapi data store to forward pass along the app-level context into ALL listener functions
           },
-          fetch: ['FormattedID', 'Name', 'ScheduleState']   // Look in the WSAPI docs online to see all fields available!
+          fetch: ['FormattedID', 'Name', 'Owner', 'ScheduleState']   // Look in the WSAPI docs online to see all fields available!
         });
 
     },
@@ -37,7 +37,7 @@ Ext.define('CustomApp', {
       var myGrid = Ext.create('Rally.ui.grid.Grid', {
         store: myStoryStore,
         columnCfgs: [         // Columns to display; must be the same names specified in the fetch: above in the wsapi data store
-          'FormattedID', 'Name', 'ScheduleState'
+          'FormattedID', 'Name', 'Owner', 'ScheduleState'
         ]
       });
 
